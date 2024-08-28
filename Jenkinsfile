@@ -1,20 +1,20 @@
 node {
     def app
     
-    env.IMAGE = 'easnae817/amazon'
+    env.IMAGE = 'medinahakinsowon/amazon'
 
     stage('Clone repository') {
-             git branch: 'main', url: 'https://github.com/easante817/argocd-amazon-manifest.git'  
+             git branch: 'main', url: 'https://github.com/medinahakinsowon/argocd-amazon-manifest.git'  
     }
 
     stage('Update GIT') {
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    withCredentials([usernamePassword(credentialsId: 'karo-github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: 'medinat-github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         //script {def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')}
                         //script  {def IMAGE='easnae817/amazon'}
-                        sh "git config user.email easante817@gmail.com"
-                        sh "git config user.name easante817"
+                        sh "git config user.email medinahakinsowon@gmail.com"
+                        sh "git config user.name medinahakinsowon"
                         //sh "git switch master"
                         sh "cat deployment.yml"
                         sh "sed -i 's+${IMAGE}.*+${IMAGE}:${DOCKERTAG}+g' deployment.yml"
